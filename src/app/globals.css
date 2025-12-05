@@ -1,22 +1,134 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
+/* 테마 파일 import */
+@import '../styles/themes/default.css';
+@import '../styles/themes/coral.css';
+@import '../styles/themes/ocean.css';
+@import '../styles/themes/forest.css';
+
+/* 기본 변수 */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme inline {
+  /* 기본 배경/전경 */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* 테마별 브랜드 컬러 */
+  --color-theme-primary: var(--theme-primary, #2563eb);
+  --color-theme-primary-light: var(--theme-primary-light, #3b82f6);
+  --color-theme-primary-dark: var(--theme-primary-dark, #1d4ed8);
+  --color-theme-secondary: var(--theme-secondary, #60a5fa);
+  --color-theme-accent: var(--theme-accent, #93c5fd);
+
+  /* 테마별 텍스트 */
+  --color-theme-text: var(--theme-text, #374151);
+  --color-theme-text-muted: var(--theme-text-muted, #6b7280);
+
+  /* 테마별 배경 */
+  --color-theme-bg-card: var(--theme-bg-card, #f3f4f6);
+  --color-theme-bg-hover: var(--theme-bg-hover, #e5e7eb);
+  --color-theme-bg-page: var(--theme-bg-page, #ffffff);
+  --color-theme-bg-sidebar: var(--theme-bg-sidebar, #f9fafb);
+  --color-theme-bg-header: var(--theme-bg-header, #ffffff);
+  --color-theme-bg-footer: var(--theme-bg-footer, #f9fafb);
+
+  /* 테마별 테두리 */
+  --color-theme-border: var(--theme-border, #d1d5db);
+  --color-theme-border-light: var(--theme-border-light, #e5e7eb);
+  --color-theme-divider: var(--theme-divider, #e5e7eb);
+
+  /* 상태 색상 */
+  --color-theme-success: var(--theme-success, #10b981);
+  --color-theme-success-light: var(--theme-success-light, #34d399);
+  --color-theme-warning: var(--theme-warning, #f59e0b);
+  --color-theme-warning-light: var(--theme-warning-light, #fbbf24);
+  --color-theme-error: var(--theme-error, #ef4444);
+  --color-theme-error-light: var(--theme-error-light, #f87171);
+  --color-theme-info: var(--theme-info, #3b82f6);
+  --color-theme-info-light: var(--theme-info-light, #60a5fa);
+
+  /* 링크 */
+  --color-theme-link: var(--theme-link, #2563eb);
+  --color-theme-link-hover: var(--theme-link-hover, #1d4ed8);
+  --color-theme-link-visited: var(--theme-link-visited, #7c3aed);
+
+  /* 그림자 & 포커스 */
+  --color-theme-focus: var(--theme-focus, #2563eb);
+
+  /* 버튼 - Primary */
+  --color-theme-btn-primary-bg: var(--theme-btn-primary-bg, #2563eb);
+  --color-theme-btn-primary-text: var(--theme-btn-primary-text, #ffffff);
+  --color-theme-btn-primary-hover: var(--theme-btn-primary-hover, #1d4ed8);
+  --color-theme-btn-primary-active: var(--theme-btn-primary-active, #1e40af);
+
+  /* 버튼 - Secondary */
+  --color-theme-btn-secondary-bg: var(--theme-btn-secondary-bg, #f3f4f6);
+  --color-theme-btn-secondary-text: var(--theme-btn-secondary-text, #374151);
+  --color-theme-btn-secondary-hover: var(--theme-btn-secondary-hover, #e5e7eb);
+  --color-theme-btn-secondary-border: var(--theme-btn-secondary-border, #d1d5db);
+
+  /* 버튼 - Outline */
+  --color-theme-btn-outline-border: var(--theme-btn-outline-border, #2563eb);
+  --color-theme-btn-outline-text: var(--theme-btn-outline-text, #2563eb);
+  --color-theme-btn-outline-hover-bg: var(--theme-btn-outline-hover-bg, #eff6ff);
+
+  /* 버튼 - Ghost */
+  --color-theme-btn-ghost-text: var(--theme-btn-ghost-text, #2563eb);
+  --color-theme-btn-ghost-hover: var(--theme-btn-ghost-hover, #f3f4f6);
+
+  /* 입력 요소 */
+  --color-theme-input-bg: var(--theme-input-bg, #ffffff);
+  --color-theme-input-border: var(--theme-input-border, #d1d5db);
+  --color-theme-input-border-hover: var(--theme-input-border-hover, #9ca3af);
+  --color-theme-input-border-focus: var(--theme-input-border-focus, #2563eb);
+  --color-theme-input-text: var(--theme-input-text, #374151);
+  --color-theme-input-placeholder: var(--theme-input-placeholder, #9ca3af);
+  --color-theme-input-disabled-bg: var(--theme-input-disabled-bg, #f9fafb);
+  --color-theme-input-disabled-text: var(--theme-input-disabled-text, #d1d5db);
+
+  /* 배지 & 태그 */
+  --color-theme-badge-bg: var(--theme-badge-bg, #eff6ff);
+  --color-theme-badge-text: var(--theme-badge-text, #1e40af);
+  --color-theme-tag-bg: var(--theme-tag-bg, #e5e7eb);
+  --color-theme-tag-text: var(--theme-tag-text, #374151);
+  --color-theme-tag-hover: var(--theme-tag-hover, #d1d5db);
+
+  /* 카드 */
+  --color-theme-card-border-accent: var(--theme-card-border-accent, #3b82f6);
+
+  /* 토글 & 체크박스 */
+  --color-theme-toggle-bg: var(--theme-toggle-bg, #d1d5db);
+  --color-theme-toggle-bg-on: var(--theme-toggle-bg-on, #2563eb);
+  --color-theme-toggle-thumb: var(--theme-toggle-thumb, #ffffff);
+  --color-theme-checkbox-border: var(--theme-checkbox-border, #d1d5db);
+  --color-theme-checkbox-checked: var(--theme-checkbox-checked, #2563eb);
+
+  /* 모달 & 알림 */
+  --color-theme-modal-bg: var(--theme-modal-bg, #ffffff);
+  --color-theme-notification-bg: var(--theme-notification-bg, #ffffff);
+  --color-theme-notification-border: var(--theme-notification-border, #e5e7eb);
+
+  /* 프로그레스 바 */
+  --color-theme-progress-bg: var(--theme-progress-bg, #e5e7eb);
+  --color-theme-progress-fill: var(--theme-progress-fill, #2563eb);
+
+  /* 툴팁 */
+  --color-theme-tooltip-bg: var(--theme-tooltip-bg, #1f2937);
+  --color-theme-tooltip-text: var(--theme-tooltip-text, #ffffff);
+
+  /* 폰트 */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 body {

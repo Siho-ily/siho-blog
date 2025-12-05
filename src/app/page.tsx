@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
         <Image src="file.svg" alt="Sample Image" width={600} height={400} />
         <p>This is a sample Next.js application using the App Router.</p>
       </main>
+      <ThemeToggle />
     </>
   );
 }

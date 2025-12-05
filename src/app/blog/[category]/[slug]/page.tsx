@@ -18,7 +18,7 @@ export default async function PostPage({ params }: Params) {
   const post = getPost(category, slug);
 
   return (
-    <article className="prose dark:prose-invert max-w-3xl mx-auto py-8">
+    <article className="prose prose-coral max-w-3xl mx-auto py-8">
       <h1 className="mb-2">{post.title}</h1>
       <p className="text-sm text-slate-500 mb-8">
         {post.date} · {post.tags?.join(', ')}

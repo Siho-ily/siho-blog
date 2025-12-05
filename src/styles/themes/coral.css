@@ -1,0 +1,322 @@
+/* ===================================================
+   Coral 테마
+   - 따뜻하고 부드러운 느낌
+   - 라이트: 핑크/코랄 계열 (따뜻함)
+   - 다크: 블루/시안 계열 (시원함)
+   =================================================== */
+
+/* ===== 라이트 모드 - 코랄 핑크 ===== */
+.coral {
+  /* 브랜드 컬러 - 핑크/코랄 계열 */
+  --theme-primary: #ff6b9d; /* 메인 핑크 */
+  --theme-primary-light: #ff8fb3; /* 밝은 핑크 */
+  --theme-primary-dark: #ff4081; /* 진한 핑크 (hover 등) */
+
+  --theme-secondary: #ff80ab; /* 보조 핑크 */
+  --theme-accent: #ffc2d4; /* 파스텔 핑크 */
+
+  /* 텍스트 컬러 */
+  --theme-text: #4a5568; /* 본문 텍스트 (부드러운 회색) */
+  --theme-text-muted: #718096; /* 흐린 텍스트 */
+
+  /* 배경 컬러 */
+  --theme-bg-card: #fff5f7; /* 연한 핑크 배경 */
+  --theme-bg-hover: #ffe0eb; /* hover 시 진한 핑크 배경 */
+
+  /* 테두리 */
+  --theme-border: #ffc2d4; /* 핑크 테두리 */
+  --theme-border-light: #ffe0eb; /* 밝은 핑크 테두리 */
+
+  /* 상태 색상 (Status Colors) */
+  --theme-success: #48bb78; /* 성공 - 그린 */
+  --theme-success-light: #68d391; /* 밝은 성공 */
+  --theme-warning: #ed8936; /* 경고 - 오렌지 */
+  --theme-warning-light: #f6ad55; /* 밝은 경고 */
+  --theme-error: #f56565; /* 에러 - 레드 */
+  --theme-error-light: #fc8181; /* 밝은 에러 */
+  --theme-info: #4299e1; /* 정보 - 블루 */
+  --theme-info-light: #63b3ed; /* 밝은 정보 */
+
+  /* 링크 */
+  --theme-link: #ff6b9d; /* 기본 링크 */
+  --theme-link-hover: #ff4081; /* 링크 hover */
+  --theme-link-visited: #e91e63; /* 방문한 링크 */
+
+  /* 그림자 & 포커스 */
+  --theme-shadow: rgba(255, 107, 157, 0.15); /* 기본 그림자 */
+  --theme-shadow-lg: rgba(255, 107, 157, 0.25); /* 큰 그림자 */
+  --theme-focus: #ff6b9d; /* 포커스 링 */
+  --theme-focus-ring: rgba(255, 107, 157, 0.3); /* 포커스 링 그림자 */
+
+  /* 버튼 - Primary */
+  --theme-btn-primary-bg: #ff6b9d; /* 메인 버튼 배경 */
+  --theme-btn-primary-text: #ffffff; /* 메인 버튼 텍스트 */
+  --theme-btn-primary-hover: #ff4081; /* 메인 버튼 hover */
+  --theme-btn-primary-active: #e91e63; /* 메인 버튼 active */
+
+  /* 버튼 - Secondary */
+  --theme-btn-secondary-bg: #fff5f7; /* 보조 버튼 배경 */
+  --theme-btn-secondary-text: #ff6b9d; /* 보조 버튼 텍스트 */
+  --theme-btn-secondary-hover: #ffe0eb; /* 보조 버튼 hover */
+  --theme-btn-secondary-border: #ffc2d4; /* 보조 버튼 테두리 */
+
+  /* 버튼 - Outline */
+  --theme-btn-outline-border: #ff6b9d; /* 아웃라인 버튼 테두리 */
+  --theme-btn-outline-text: #ff6b9d; /* 아웃라인 버튼 텍스트 */
+  --theme-btn-outline-hover-bg: #fff5f7; /* 아웃라인 버튼 hover 배경 */
+
+  /* 버튼 - Ghost */
+  --theme-btn-ghost-text: #ff6b9d; /* 고스트 버튼 텍스트 */
+  --theme-btn-ghost-hover: #fff5f7; /* 고스트 버튼 hover */
+
+  /* 입력 요소 (Input, Textarea, Select) */
+  --theme-input-bg: #ffffff; /* 입력 필드 배경 */
+  --theme-input-border: #ffc2d4; /* 입력 필드 테두리 */
+  --theme-input-border-hover: #ff8fb3; /* 입력 필드 hover 테두리 */
+  --theme-input-border-focus: #ff6b9d; /* 입력 필드 focus 테두리 */
+  --theme-input-text: #4a5568; /* 입력 필드 텍스트 */
+  --theme-input-placeholder: #a0aec0; /* placeholder 텍스트 */
+  --theme-input-disabled-bg: #f7fafc; /* 비활성 입력 필드 배경 */
+  --theme-input-disabled-text: #cbd5e0; /* 비활성 텍스트 */
+
+  /* 레이아웃 */
+  --theme-bg-page: #ffffff; /* 페이지 전체 배경 */
+  --theme-bg-sidebar: #fff5f7; /* 사이드바 배경 */
+  --theme-bg-header: #ffffff; /* 헤더 배경 */
+  --theme-bg-footer: #fff5f7; /* 푸터 배경 */
+  --theme-divider: #ffc2d4; /* 구분선 */
+
+  /* 배지 & 태그 */
+  --theme-badge-bg: #fff5f7; /* 배지 배경 */
+  --theme-badge-text: #ff6b9d; /* 배지 텍스트 */
+  --theme-tag-bg: #ffe0eb; /* 태그 배경 */
+  --theme-tag-text: #ff4081; /* 태그 텍스트 */
+  --theme-tag-hover: #ffc2d4; /* 태그 hover */
+
+  /* 카드 변형 */
+  --theme-card-elevated-shadow: 0 4px 6px rgba(255, 107, 157, 0.1); /* 떠있는 카드 그림자 */
+  --theme-card-border-accent: #ff8fb3; /* 강조된 카드 테두리 */
+
+  /* 토글 & 체크박스 */
+  --theme-toggle-bg: #e2e8f0; /* 토글 배경 (off) */
+  --theme-toggle-bg-on: #ff6b9d; /* 토글 배경 (on) */
+  --theme-toggle-thumb: #ffffff; /* 토글 손잡이 */
+  --theme-checkbox-border: #ffc2d4; /* 체크박스 테두리 */
+  --theme-checkbox-checked: #ff6b9d; /* 체크박스 체크됨 */
+
+  /* 알림 & 모달 */
+  --theme-modal-overlay: rgba(0, 0, 0, 0.5); /* 모달 오버레이 */
+  --theme-modal-bg: #ffffff; /* 모달 배경 */
+  --theme-notification-bg: #ffffff; /* 알림 배경 */
+  --theme-notification-border: #ffc2d4; /* 알림 테두리 */
+
+  /* 프로그레스 바 */
+  --theme-progress-bg: #f7fafc; /* 프로그레스 배경 */
+  --theme-progress-fill: #ff6b9d; /* 프로그레스 채움 */
+
+  /* 툴팁 */
+  --theme-tooltip-bg: #2d3748; /* 툴팁 배경 */
+  --theme-tooltip-text: #ffffff; /* 툴팁 텍스트 */
+} /* Typography (마크다운) 스타일 - 핑크 계열 */
+.coral .prose {
+  /* 본문 텍스트 */
+  --tw-prose-body: #4a5568; /* 읽기 편한 회색 */
+  --tw-prose-headings: #ff6b9d; /* 핑크 제목 */
+  --tw-prose-lead: #718096; /* 리드 문단 */
+
+  /* 링크 */
+  --tw-prose-links: #ff4081; /* 진한 핑크 링크 */
+  --tw-prose-link-underline: #ff80ab; /* 핑크 밑줄 */
+
+  /* 강조 텍스트 */
+  --tw-prose-bold: #ff6b9d; /* 굵은 글씨 */
+  --tw-prose-strong: #ff6b9d; /* strong 태그 */
+  --tw-prose-italic: #ff8fb3; /* 이탤릭 */
+  --tw-prose-underline: #ff80ab; /* 밑줄 */
+
+  /* 인용문 */
+  --tw-prose-quotes: #ff8fb3; /* 인용문 텍스트 */
+  --tw-prose-quote-borders: #ffc2d4; /* 인용문 좌측 세로선 */
+
+  /* 코드 */
+  --tw-prose-code: #ff4081; /* 인라인 코드 텍스트 */
+  --tw-prose-code-bg: #fff5f7; /* 인라인 코드 배경 */
+  --tw-prose-pre-code: #ffe0eb; /* 코드 블록 텍스트 */
+  --tw-prose-pre-bg: #2d1a24; /* 코드 블록 배경 */
+
+  /* 구분선 및 테이블 */
+  --tw-prose-hr: #ffc2d4; /* 수평선 (---) */
+  --tw-prose-th-borders: #ff8fb3; /* 테이블 헤더 테두리 */
+  --tw-prose-td-borders: #ffc2d4; /* 테이블 셀 테두리 */
+
+  /* 목록 */
+  --tw-prose-counters: #ff6b9d; /* 순서 목록 번호 (1, 2, 3...) */
+  --tw-prose-bullets: #ff8fb3; /* 비순서 목록 글머리 (•) */
+  --tw-prose-ol-counters: #ff6b9d; /* 순서 목록 번호 */
+  --tw-prose-ul-bullets: #ff8fb3; /* 비순서 목록 기호 */
+
+  /* 기타 요소 */
+  --tw-prose-captions: #718096; /* 이미지 캡션 */
+  --tw-prose-figcaptions: #718096; /* figure 캡션 */
+  --tw-prose-kbd: #2d3748; /* 키보드 입력 표시 */
+  --tw-prose-kbd-shadows: #ff80ab; /* kbd 그림자 */
+}
+
+/* ===== 다크 모드 - 코랄 블루 (눈의 피로 감소) ===== */
+.dark.coral {
+  /* 브랜드 컬러 - 시원한 블루 계열 */
+  --theme-primary: #7dcfed; /* 밝은 코랄 블루 */
+  --theme-primary-light: #a0d8ef; /* 더 밝은 블루 */
+  --theme-primary-dark: #5eb3d6; /* 진한 블루 (hover 등) */
+
+  --theme-secondary: #89d4ed; /* 보조 블루 */
+  --theme-accent: #5eb3d6; /* 강조 블루 */
+
+  /* 텍스트 컬러 */
+  --theme-text: #cbd5e0; /* 밝은 회색 텍스트 */
+  --theme-text-muted: #a0aec0; /* 흐린 텍스트 */
+
+  /* 배경 컬러 */
+  --theme-bg-card: #1a2332; /* 어두운 블루 배경 */
+  --theme-bg-hover: #0c4a6e; /* hover 시 진한 블루 배경 */
+
+  /* 테두리 */
+  --theme-border: #5eb3d6; /* 블루 테두리 */
+  --theme-border-light: #4a90b0; /* 밝은 블루 테두리 */
+
+  /* 상태 색상 (Status Colors) - 다크 모드 */
+  --theme-success: #68d391; /* 성공 - 밝은 그린 */
+  --theme-success-light: #9ae6b4; /* 더 밝은 성공 */
+  --theme-warning: #f6ad55; /* 경고 - 밝은 오렌지 */
+  --theme-warning-light: #fbd38d; /* 더 밝은 경고 */
+  --theme-error: #fc8181; /* 에러 - 밝은 레드 */
+  --theme-error-light: #feb2b2; /* 더 밝은 에러 */
+  --theme-info: #63b3ed; /* 정보 - 밝은 블루 */
+  --theme-info-light: #90cdf4; /* 더 밝은 정보 */
+
+  /* 링크 */
+  --theme-link: #7dcfed; /* 기본 링크 */
+  --theme-link-hover: #a0d8ef; /* 링크 hover */
+  --theme-link-visited: #5eb3d6; /* 방문한 링크 */
+
+  /* 그림자 & 포커스 */
+  --theme-shadow: rgba(125, 207, 237, 0.15); /* 기본 그림자 */
+  --theme-shadow-lg: rgba(125, 207, 237, 0.25); /* 큰 그림자 */
+  --theme-focus: #7dcfed; /* 포커스 링 */
+  --theme-focus-ring: rgba(125, 207, 237, 0.3); /* 포커스 링 그림자 */
+
+  /* 버튼 - Primary */
+  --theme-btn-primary-bg: #7dcfed; /* 메인 버튼 배경 */
+  --theme-btn-primary-text: #1a365d; /* 메인 버튼 텍스트 */
+  --theme-btn-primary-hover: #a0d8ef; /* 메인 버튼 hover */
+  --theme-btn-primary-active: #5eb3d6; /* 메인 버튼 active */
+
+  /* 버튼 - Secondary */
+  --theme-btn-secondary-bg: #2c5f7d; /* 보조 버튼 배경 */
+  --theme-btn-secondary-text: #7dcfed; /* 보조 버튼 텍스트 */
+  --theme-btn-secondary-hover: #3a7592; /* 보조 버튼 hover */
+  --theme-btn-secondary-border: #5eb3d6; /* 보조 버튼 테두리 */
+
+  /* 버튼 - Outline */
+  --theme-btn-outline-border: #7dcfed; /* 아웃라인 버튼 테두리 */
+  --theme-btn-outline-text: #7dcfed; /* 아웃라인 버튼 텍스트 */
+  --theme-btn-outline-hover-bg: #2c5f7d; /* 아웃라인 버튼 hover 배경 */
+
+  /* 버튼 - Ghost */
+  --theme-btn-ghost-text: #7dcfed; /* 고스트 버튼 텍스트 */
+  --theme-btn-ghost-hover: #2c5f7d; /* 고스트 버튼 hover */
+
+  /* 입력 요소 (Input, Textarea, Select) */
+  --theme-input-bg: #1e3a52; /* 입력 필드 배경 */
+  --theme-input-border: #5eb3d6; /* 입력 필드 테두리 */
+  --theme-input-border-hover: #7dcfed; /* 입력 필드 hover 테두리 */
+  --theme-input-border-focus: #a0d8ef; /* 입력 필드 focus 테두리 */
+  --theme-input-text: #cbd5e0; /* 입력 필드 텍스트 */
+  --theme-input-placeholder: #718096; /* placeholder 텍스트 */
+  --theme-input-disabled-bg: #2d3748; /* 비활성 입력 필드 배경 */
+  --theme-input-disabled-text: #4a5568; /* 비활성 텍스트 */
+
+  /* 레이아웃 */
+  --theme-bg-page: #0f2537; /* 페이지 전체 배경 */
+  --theme-bg-sidebar: #1a365d; /* 사이드바 배경 */
+  --theme-bg-header: #1e3a52; /* 헤더 배경 */
+  --theme-bg-footer: #1a365d; /* 푸터 배경 */
+  --theme-divider: #5eb3d6; /* 구분선 */
+
+  /* 배지 & 태그 */
+  --theme-badge-bg: #2c5f7d; /* 배지 배경 */
+  --theme-badge-text: #7dcfed; /* 배지 텍스트 */
+  --theme-tag-bg: #3a7592; /* 태그 배경 */
+  --theme-tag-text: #a0d8ef; /* 태그 텍스트 */
+  --theme-tag-hover: #5eb3d6; /* 태그 hover */
+
+  /* 카드 변형 */
+  --theme-card-elevated-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* 떠있는 카드 그림자 */
+  --theme-card-border-accent: #7dcfed; /* 강조된 카드 테두리 */
+
+  /* 토글 & 체크박스 */
+  --theme-toggle-bg: #4a5568; /* 토글 배경 (off) */
+  --theme-toggle-bg-on: #7dcfed; /* 토글 배경 (on) */
+  --theme-toggle-thumb: #ffffff; /* 토글 손잡이 */
+  --theme-checkbox-border: #5eb3d6; /* 체크박스 테두리 */
+  --theme-checkbox-checked: #7dcfed; /* 체크박스 체크됨 */
+
+  /* 알림 & 모달 */
+  --theme-modal-overlay: rgba(0, 0, 0, 0.7); /* 모달 오버레이 */
+  --theme-modal-bg: #1e3a52; /* 모달 배경 */
+  --theme-notification-bg: #2c5f7d; /* 알림 배경 */
+  --theme-notification-border: #5eb3d6; /* 알림 테두리 */
+
+  /* 프로그레스 바 */
+  --theme-progress-bg: #2d3748; /* 프로그레스 배경 */
+  --theme-progress-fill: #7dcfed; /* 프로그레스 채움 */
+
+  /* 툴팁 */
+  --theme-tooltip-bg: #1a365d; /* 툴팁 배경 */
+  --theme-tooltip-text: #ffffff; /* 툴팁 텍스트 */
+}
+
+/* Typography (마크다운) 스타일 - 블루 계열 */
+.dark.coral .prose {
+  /* 본문 텍스트 - 밝은 색상으로 가독성 확보 */
+  --tw-prose-body: #cbd5e0; /* 밝은 회색 */
+  --tw-prose-headings: #7dcfed; /* 밝은 블루 제목 */
+  --tw-prose-lead: #a0aec0; /* 리드 문단 */
+
+  /* 링크 - 시안 계열 */
+  --tw-prose-links: #5eb3d6; /* 코랄 블루 링크 */
+  --tw-prose-link-underline: #89d4ed; /* 밝은 블루 밑줄 */
+
+  /* 강조 텍스트 */
+  --tw-prose-bold: #7dcfed; /* 밝은 블루 굵은 글씨 */
+  --tw-prose-strong: #7dcfed; /* strong 태그 */
+  --tw-prose-italic: #89d4ed; /* 이탤릭 */
+  --tw-prose-underline: #a0d8ef; /* 밑줄 */
+
+  /* 인용문 */
+  --tw-prose-quotes: #89d4ed; /* 인용문 텍스트 */
+  --tw-prose-quote-borders: #5eb3d6; /* 인용문 세로선 */
+
+  /* 코드 */
+  --tw-prose-code: #5eb3d6; /* 인라인 코드 텍스트 */
+  --tw-prose-code-bg: #1a2332; /* 인라인 코드 배경 */
+  --tw-prose-pre-code: #d4f1f9; /* 코드 블록 텍스트 (밝음) */
+  --tw-prose-pre-bg: #1a202c; /* 코드 블록 배경 (어두움) */
+
+  /* 구분선 및 테이블 */
+  --tw-prose-hr: #4a90b0; /* 수평선 */
+  --tw-prose-th-borders: #5eb3d6; /* 테이블 헤더 테두리 */
+  --tw-prose-td-borders: #4a90b0; /* 테이블 셀 테두리 */
+
+  /* 목록 */
+  --tw-prose-counters: #7dcfed; /* 순서 목록 번호 */
+  --tw-prose-bullets: #89d4ed; /* 비순서 목록 글머리 */
+  --tw-prose-ol-counters: #7dcfed; /* 순서 목록 번호 */
+  --tw-prose-ul-bullets: #89d4ed; /* 비순서 목록 기호 */
+
+  /* 기타 요소 */
+  --tw-prose-captions: #a0aec0; /* 캡션 */
+  --tw-prose-figcaptions: #a0aec0; /* figure 캡션 */
+  --tw-prose-kbd: #e2e8f0; /* 키보드 입력 표시 */
+  --tw-prose-kbd-shadows: #5eb3d6; /* kbd 그림자 */
+}
