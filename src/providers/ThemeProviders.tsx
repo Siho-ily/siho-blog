@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import { ColorThemeProvider } from '@/hooks/useColorTheme';
+import { ColorThemeProvider } from './ColorThemeProvider';
 
 export function ThemeProviders({ children }: { children: ReactNode }) {
   return (
