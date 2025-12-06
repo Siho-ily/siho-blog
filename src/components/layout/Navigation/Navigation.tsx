@@ -1,7 +1,8 @@
 'use client';
 
-import { Icon } from '@iconify/react';
 import { motion } from 'motion/react';
+import home3Line from '@iconify-icons/mingcute/home-3-line';
+import IconifyIcon from '@/components/common/icons/IconifyIcon';
 import NavigationControl from './NavigationControl';
 import NavigationData from '@/data/navigation.json';
 
@@ -41,7 +42,7 @@ export default function Navigation() {
                   key={item.href}
                   href={item.href}
                   className="flex items-center space-x-2 text-theme-primary hover:text-theme-secondary">
-                  <Icon icon={item.icon} className="w-6 h-6" />
+                  <IconifyIcon icon={home3Line} className="w-6 h-6" />
                   <span>{item.label}</span>
                 </a>
               ))}

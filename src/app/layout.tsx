@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProviders } from '@/providers/ThemeProviders';
 import Navigation from '@/components/layout/Navigation/Navigation';
-import { ThemeProvider } from 'next-themes';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -27,13 +26,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const colorTheme = localStorage.getItem('colorTheme') || 'coral';
+                document.documentElement.classList.add(colorTheme);
+              } catch (e) {}
+            `
+          }}
+        />
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning>
         {/* ThemeProviders - 테마 Providers, 다크/라이트 및 테마 상태 관리 */}
         <ThemeProviders>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Navigation />
-            {children}
-          </ThemeProvider>
+          <Navigation />
+          {children}
         </ThemeProviders>
       </body>
     </html>

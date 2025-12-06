@@ -10,7 +10,8 @@ export function ThemeProviders({ children }: { children: ReactNode }) {
       attribute="class"
       defaultTheme="system"
       enableSystem
-      disableTransitionOnChange>
+      enableColorScheme
+      storageKey="theme">
       <ColorThemeProvider>{children}</ColorThemeProvider>
     </NextThemesProvider>
   );
