@@ -25,20 +25,60 @@
    - `next-themes` 라이브러리로 관리
    - 시스템 설정 자동 감지 가능
    - 로컬 스토리지에 저장
+   - `<html>` 요소에 `dark` 클래스 추가/제거
 
 2. **컬러 테마** (Color Themes)
    - 4가지 컬러 팔레트: default, coral, ocean, forest
-   - 커스텀 `useColorTheme` 훅으로 관리
+   - 커스텀 `ColorThemeProvider`로 관리
    - 로컬 스토리지에 저장
+   - `<html>` 요소에 테마 클래스 추가/제거
 
 **총 8가지 조합**: 4개 컬러 × 2개 모드 = 8가지 테마
+
+### HTML 클래스 구조
+
+두 Provider가 하나의 `<html>` 요소에 클래스를 동시에 적용합니다:
+
+```html
+<!-- 라이트 + 코랄 -->
+<html class="coral">
+  <!-- 다크 + 코랄 -->
+  <html class="dark coral">
+    <!-- 다크 + 오션 -->
+    <html class="dark ocean">
+      <!-- 라이트 + 포레스트 -->
+      <html class="forest"></html>
+    </html>
+  </html>
+</html>
+```
+
+### CSS 선택자 구조
+
+각 테마 파일에서는 다음과 같은 선택자로 스타일을 정의합니다:
+
+```css
+/* 라이트 모드 + 코랄 테마 */
+.coral {
+  --theme-primary: #ff6b9d; /* 핑크 */
+}
+
+/* 다크 모드 + 코랄 테마 */
+.dark.coral {
+  --theme-primary: #7dcfed; /* 블루 */
+}
+```
+
+**`.dark.coral`의 의미**: "dark와 coral 클래스를 동시에 가진 요소"를 선택합니다. 즉, `<html class="dark coral">`에 적용되는 스타일입니다.
 
 ### 기술 스택
 
 - **Tailwind CSS v4**: `@theme inline` 문법으로 CSS 변수 등록
-- **next-themes**: 다크/라이트 모드 관리
+- **next-themes**: 다크/라이트 모드 관리 (`ThemeProvider`)
+- **ColorThemeProvider**: 커스텀 컬러 테마 관리
 - **@tailwindcss/typography**: 마크다운 스타일링
 - **CSS Variables**: `--theme-*` (컴포넌트), `--tw-prose-*` (타이포그래피)
+- **shadcn/ui 호환**: shadcn/ui 변수 매핑으로 완전 호환
 
 ---
 
@@ -184,6 +224,44 @@
 </button>
 ```
 
+### shadcn/ui 호환성
+
+모든 테마 파일에는 shadcn/ui와 완전 호환되는 변수 매핑이 포함되어 있습니다:
+
+```css
+/* 각 테마 파일의 shadcn/ui 변수 매핑 */
+.coral {
+  /* 기존 테마 변수들... */
+
+  /* shadcn/ui 호환 변수 */
+  --background: #ffffff;
+  --foreground: #4a5568;
+  --primary: #ff6b9d;
+  --primary-foreground: #ffffff;
+  --secondary: #fff5f7;
+  --secondary-foreground: #ff6b9d;
+  --muted: #ffe0eb;
+  --muted-foreground: #718096;
+  --accent: #ffe0eb;
+  --accent-foreground: #ff4081;
+  --destructive: #f56565;
+  --destructive-foreground: #ffffff;
+  --border: #ffc2d4;
+  --input: #ffc2d4;
+  --ring: #ff6b9d;
+  --sidebar-background: #fff5f7;
+  --sidebar-foreground: #4a5568;
+  --sidebar-primary: #ff6b9d;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffe0eb;
+  --sidebar-accent-foreground: #ff4081;
+  --sidebar-border: #ffc2d4;
+  --sidebar-ring: #ff6b9d;
+}
+```
+
+**결과**: shadcn/ui 컴포넌트를 설치하면 자동으로 현재 테마 색상을 사용합니다!
+
 ---
 
 ## 테마 전환하기
@@ -200,7 +278,7 @@ import { useTheme } from 'next-themes';
 export default function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
 
-  return (
+  return ()
     <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
       {theme === 'dark' ? '🌙' : '☀️'}
     </button>
@@ -210,7 +288,7 @@ export default function ThemeSwitcher() {
 
 ### 컬러 테마 전환
 
-커스텀 `useColorTheme` 훅 사용:
+`ColorThemeProvider`의 `useColorTheme` 훅 사용:
 
 ```tsx
 'use client';
@@ -231,6 +309,22 @@ export default function ColorThemeSwitcher() {
 }
 ```
 
+**작동 원리**: `ColorThemeProvider`가 `<html>` 요소의 클래스를 동적으로 변경합니다:
+
+```typescript
+// ColorThemeProvider 내부
+useEffect(() => {
+  const root = document.documentElement;
+  const themes: ColorTheme[] = ['default', 'coral', 'ocean', 'forest'];
+
+  // 모든 컬러 테마 클래스 제거
+  themes.forEach(theme => root.classList.remove(theme));
+
+  // 선택된 컬러 테마 클래스 추가
+  root.classList.add(colorTheme);
+}, [colorTheme]);
+```
+
 ### 통합 테마 토글 컴포넌트
 
 ```tsx
@@ -239,6 +333,7 @@ export default function ColorThemeSwitcher() {
 
 import { useTheme } from 'next-themes';
 import { useColorTheme } from '@/hooks/useColorTheme';
+import type { ColorTheme } from '@/providers/ColorThemeProvider';
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -246,13 +341,13 @@ export default function ThemeToggle() {
 
   return (
     <div className="flex gap-4">
-      {/* 다크/라이트 모드 */}
+      {/* 다크/라이트 모드 - next-themes 제어 */}
       <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
         {theme === 'dark' ? '🌙 다크' : '☀️ 라이트'}
       </button>
 
-      {/* 컬러 테마 */}
-      <select value={colorTheme} onChange={e => setColorTheme(e.target.value as any)}>
+      {/* 컬러 테마 - ColorThemeProvider 제어 */}
+      <select value={colorTheme} onChange={e => setColorTheme(e.target.value as ColorTheme)}>
         <option value="default">Default</option>
         <option value="coral">Coral</option>
         <option value="ocean">Ocean</option>
@@ -262,6 +357,10 @@ export default function ThemeToggle() {
   );
 }
 ```
+
+**결과**: 사용자가 "다크 + 코랄"을 선택하면 `<html class="dark coral">`이 되어 `.dark.coral` 스타일이 적용됩니다.
+
+````
 
 ---
 
@@ -281,7 +380,7 @@ export default function Card() {
     </div>
   );
 }
-```
+````
 
 ### 2. CSS 변수 직접 사용
 
@@ -487,9 +586,11 @@ blog/
 ├── src/
 │   ├── app/
 │   │   ├── globals.css           # 메인 CSS, @theme inline 블록
-│   │   ├── layout.tsx            # ThemeProvider 설정
+│   │   ├── layout.tsx            # Provider 설정
 │   │   └── test/
 │   │       └── page.tsx          # 테마 테스트 페이지
+│   ├── providers/
+│   │   └── ColorThemeProvider.tsx # 컬러 테마 Provider
 │   ├── styles/
 │   │   └── themes/
 │   │       ├── default.css       # Default 테마
@@ -502,6 +603,184 @@ blog/
 │       └── ThemeToggle.tsx       # 테마 전환 UI
 └── docs/
     └── theme-guide.md            # 이 문서
+```
+
+---
+
+## Provider 설정
+
+### layout.tsx 설정
+
+두 Provider를 모두 설정해야 2차원 테마 시스템이 작동합니다:
+
+```tsx
+// src/app/layout.tsx
+import { ThemeProvider } from 'next-themes';
+import { ColorThemeProvider } from '@/providers/ColorThemeProvider';
+import './globals.css';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="ko" suppressHydrationWarning>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange>
+          <ColorThemeProvider>{children}</ColorThemeProvider>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+### ColorThemeProvider 구조
+
+```tsx
+// src/providers/ColorThemeProvider.tsx
+'use client';
+
+import { createContext, useEffect, useState, ReactNode } from 'react';
+
+export type ColorTheme = 'default' | 'coral' | 'ocean' | 'forest';
+
+export interface ColorThemeContextType {
+  colorTheme: ColorTheme;
+  setColorTheme: (theme: ColorTheme) => void;
+}
+
+export const ColorThemeContext = createContext<ColorThemeContextType | undefined>(undefined);
+
+export function ColorThemeProvider({ children }: { children: ReactNode }) {
+  const [colorTheme, setColorThemeState] = useState<ColorTheme>('coral');
+
+  // HTML 요소에 테마 클래스 적용
+  useEffect(() => {
+    const root = document.documentElement;
+    const themes: ColorTheme[] = ['default', 'coral', 'ocean', 'forest'];
+
+    themes.forEach(theme => root.classList.remove(theme));
+    root.classList.add(colorTheme);
+  }, [colorTheme]);
+
+  const setColorTheme = (theme: ColorTheme) => {
+    setColorThemeState(theme);
+    localStorage.setItem('colorTheme', theme);
+  };
+
+  return (
+    <ColorThemeContext.Provider value={{ colorTheme, setColorTheme }}>
+      {children}
+    </ColorThemeContext.Provider>
+  );
+}
+```
+
+### useColorTheme 훅
+
+```tsx
+// src/hooks/useColorTheme.ts
+import { useContext } from 'react';
+import { ColorThemeContext } from '@/providers/ColorThemeProvider';
+
+export function useColorTheme() {
+  const context = useContext(ColorThemeContext);
+  if (context === undefined) {
+    throw new Error('useColorTheme must be used within a ColorThemeProvider');
+  }
+  return context;
+}
+```
+
+---
+
+## Provider 설정
+
+### layout.tsx 설정
+
+두 Provider를 모두 설정해야 2차원 테마 시스템이 작동합니다:
+
+```tsx
+// src/app/layout.tsx
+import { ThemeProvider } from 'next-themes';
+import { ColorThemeProvider } from '@/providers/ColorThemeProvider';
+import './globals.css';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="ko" suppressHydrationWarning>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange>
+          <ColorThemeProvider>{children}</ColorThemeProvider>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+### ColorThemeProvider 구조
+
+```tsx
+// src/providers/ColorThemeProvider.tsx
+'use client';
+
+import { createContext, useEffect, useState, ReactNode } from 'react';
+
+export type ColorTheme = 'default' | 'coral' | 'ocean' | 'forest';
+
+export interface ColorThemeContextType {
+  colorTheme: ColorTheme;
+  setColorTheme: (theme: ColorTheme) => void;
+}
+
+export const ColorThemeContext = createContext<ColorThemeContextType | undefined>(undefined);
+
+export function ColorThemeProvider({ children }: { children: ReactNode }) {
+  const [colorTheme, setColorThemeState] = useState<ColorTheme>('coral');
+
+  // HTML 요소에 테마 클래스 적용
+  useEffect(() => {
+    const root = document.documentElement;
+    const themes: ColorTheme[] = ['default', 'coral', 'ocean', 'forest'];
+
+    themes.forEach(theme => root.classList.remove(theme));
+    root.classList.add(colorTheme);
+  }, [colorTheme]);
+
+  const setColorTheme = (theme: ColorTheme) => {
+    setColorThemeState(theme);
+    localStorage.setItem('colorTheme', theme);
+  };
+
+  return (
+    <ColorThemeContext.Provider value={{ colorTheme, setColorTheme }}>
+      {children}
+    </ColorThemeContext.Provider>
+  );
+}
+```
+
+### useColorTheme 훅
+
+```tsx
+// src/hooks/useColorTheme.ts
+import { useContext } from 'react';
+import { ColorThemeContext } from '@/providers/ColorThemeProvider';
+
+export function useColorTheme() {
+  const context = useContext(ColorThemeContext);
+  if (context === undefined) {
+    throw new Error('useColorTheme must be used within a ColorThemeProvider');
+  }
+  return context;
+}
 ```
 
 ---
@@ -545,10 +824,20 @@ blog/
 
 **체크리스트**:
 
+- [ ] `ColorThemeProvider.tsx`의 `ColorTheme` 타입에 추가했는가?
+- [ ] `ColorThemeProvider.tsx`의 `themes` 배열에 추가했는가?
 - [ ] `globals.css`에 `@import` 추가했는가?
-- [ ] `useColorTheme.ts`의 타입에 추가했는가?
 - [ ] 라이트/다크 모드 모두 정의했는가?
 - [ ] 150+ 컴포넌트 변수 + 30+ prose 변수 완성했는가?
+- [ ] shadcn/ui 호환 변수 매핑 추가했는가?
+
+**새로운 테마 추가 단계**:
+
+1. **테마 파일 생성**: `src/styles/themes/새테마.css`
+2. **Provider 업데이트**: `ColorThemeProvider.tsx`의 타입과 배열에 추가
+3. **CSS 임포트**: `globals.css`에 `@import` 추가
+4. **변수 정의**: 라이트/다크 모드 모두 정의
+5. **테스트**: `/test` 페이지에서 확인
 
 ---
 
