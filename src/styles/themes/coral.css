@@ -117,7 +117,38 @@
   /* 툴팁 */
   --theme-tooltip-bg: #2d3748; /* 툴팁 배경 */
   --theme-tooltip-text: #ffffff; /* 툴팁 텍스트 */
-} /* Typography (마크다운) 스타일 - 핑크 계열 */
+
+  /* shadcn/ui 변수 매핑 */
+  --background: #ffffff;
+  --foreground: #4a5568;
+  --card: #fff5f7;
+  --card-foreground: #4a5568;
+  --popover: #ffffff;
+  --popover-foreground: #4a5568;
+  --primary: #ff6b9d;
+  --primary-foreground: #ffffff;
+  --secondary: #fff5f7;
+  --secondary-foreground: #ff6b9d;
+  --muted: #ffe0eb;
+  --muted-foreground: #718096;
+  --accent: #ffe0eb;
+  --accent-foreground: #ff4081;
+  --destructive: #f56565;
+  --destructive-foreground: #ffffff;
+  --border: #ffc2d4;
+  --input: #ffc2d4;
+  --ring: #ff6b9d;
+  --sidebar-background: #fff5f7;
+  --sidebar-foreground: #4a5568;
+  --sidebar-primary: #ff6b9d;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffe0eb;
+  --sidebar-accent-foreground: #ff4081;
+  --sidebar-border: #ffc2d4;
+  --sidebar-ring: #ff6b9d;
+}
+
+/* Typography (마크다운) 스타일 - 핑크 계열 */
 .coral .prose {
   /* 본문 텍스트 */
   --tw-prose-body: #4a5568; /* 읽기 편한 회색 */
@@ -274,6 +305,35 @@
   /* 툴팁 */
   --theme-tooltip-bg: #1a365d; /* 툴팁 배경 */
   --theme-tooltip-text: #ffffff; /* 툴팁 텍스트 */
+
+  /* shadcn/ui 변수 매핑 - 다크 모드 */
+  --background: #0f2537;
+  --foreground: #cbd5e0;
+  --card: #1a2332;
+  --card-foreground: #cbd5e0;
+  --popover: #1e3a52;
+  --popover-foreground: #cbd5e0;
+  --primary: #7dcfed;
+  --primary-foreground: #1a365d;
+  --secondary: #2c5f7d;
+  --secondary-foreground: #7dcfed;
+  --muted: #2d3748;
+  --muted-foreground: #a0aec0;
+  --accent: #2c5f7d;
+  --accent-foreground: #a0d8ef;
+  --destructive: #fc8181;
+  --destructive-foreground: #ffffff;
+  --border: #5eb3d6;
+  --input: #5eb3d6;
+  --ring: #7dcfed;
+  --sidebar-background: #1a2332;
+  --sidebar-foreground: #cbd5e0;
+  --sidebar-primary: #7dcfed;
+  --sidebar-primary-foreground: #1a365d;
+  --sidebar-accent: #2c5f7d;
+  --sidebar-accent-foreground: #a0d8ef;
+  --sidebar-border: #5eb3d6;
+  --sidebar-ring: #7dcfed;
 }
 
 /* Typography (마크다운) 스타일 - 블루 계열 */

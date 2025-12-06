@@ -116,6 +116,35 @@
   /* 툴팁 */
   --theme-tooltip-bg: #0c4a6e;
   --theme-tooltip-text: #ffffff;
+
+  /* shadcn/ui 변수 매핑 */
+  --background: #ffffff;
+  --foreground: #334155;
+  --card: #f0f9ff;
+  --card-foreground: #334155;
+  --popover: #ffffff;
+  --popover-foreground: #334155;
+  --primary: #0ea5e9;
+  --primary-foreground: #ffffff;
+  --secondary: #f0f9ff;
+  --secondary-foreground: #0c4a6e;
+  --muted: #e0f2fe;
+  --muted-foreground: #64748b;
+  --accent: #e0f2fe;
+  --accent-foreground: #0369a1;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #bae6fd;
+  --input: #bae6fd;
+  --ring: #0ea5e9;
+  --sidebar-background: #f0f9ff;
+  --sidebar-foreground: #334155;
+  --sidebar-primary: #0ea5e9;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e0f2fe;
+  --sidebar-accent-foreground: #0369a1;
+  --sidebar-border: #bae6fd;
+  --sidebar-ring: #0ea5e9;
 }
 
 /* 마크다운 콘텐츠 스타일 - 블루/시안 톤 */
@@ -270,6 +299,35 @@
   /* 툴팁 */
   --theme-tooltip-bg: #075985;
   --theme-tooltip-text: #ffffff;
+
+  /* shadcn/ui 변수 매핑 - 다크 모드 */
+  --background: #020617;
+  --foreground: #cbd5e1;
+  --card: #0c4a6e;
+  --card-foreground: #cbd5e1;
+  --popover: #0c4a6e;
+  --popover-foreground: #cbd5e1;
+  --primary: #38bdf8;
+  --primary-foreground: #0c4a6e;
+  --secondary: #0c4a6e;
+  --secondary-foreground: #cbd5e1;
+  --muted: #082f49;
+  --muted-foreground: #94a3b8;
+  --accent: #0c4a6e;
+  --accent-foreground: #7dd3fc;
+  --destructive: #f87171;
+  --destructive-foreground: #ffffff;
+  --border: #075985;
+  --input: #075985;
+  --ring: #38bdf8;
+  --sidebar-background: #0c4a6e;
+  --sidebar-foreground: #cbd5e1;
+  --sidebar-primary: #38bdf8;
+  --sidebar-primary-foreground: #0c4a6e;
+  --sidebar-accent: #075985;
+  --sidebar-accent-foreground: #7dd3fc;
+  --sidebar-border: #075985;
+  --sidebar-ring: #38bdf8;
 }
 
 /* 다크 모드 마크다운 콘텐츠 스타일 */
